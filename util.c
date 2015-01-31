@@ -73,13 +73,12 @@ int indexOf(LinkedList list,void* data) {
 
 void *deleteElementAt(LinkedList* list, int index) {
 	Node *element = getNodeAt(*list,index);
-	void *tmp;
-	if(list->count < index || index < 0 || list->head == NULL)return NULL;
-	list->count-=1;
-	element->next==NULL && list->count==0 ? (list->head=list->tail=NULL) : (list->tail=getNodeAt(*list,index-1)); 
-	!index && element->next && (list->head=list->head->next);
-	list->count>1 && index && (getNodeAt(*list,index-1)->next=getNodeAt(*list,index+1));
-	list->count==1 && (getNodeAt(*list,index-1)->next=NULL);  
+	if(list->count < index || index < 0 || !list->head)return NULL;
+	list->count -= 1;
+	!element->next && !list->count ? (list->head = list->tail = NULL) : (list->tail = getNodeAt(*list,index-1)); 
+	!index && element->next && (list->head = list->head->next);
+	list->count > 1 && index && (getNodeAt(*list,index-1)->next = getNodeAt(*list,index+1));
+	list->count == 1 && (getNodeAt(*list,index-1)->next = NULL);  
 	return element->data;
 }
 
