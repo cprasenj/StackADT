@@ -47,14 +47,18 @@ void traverse(LinkedList list, void (*f)(void* data)) {
 	}
 }
 
-void *getElementAt(LinkedList list, int index) {
+Node *getNodeAt(LinkedList list, int index) {
 	Node* traverser;
 	int count = 0;
 	if(index > list.count || index<0) return NULL;
 	for(traverser = list.head;traverser!=NULL;traverser = traverser->next,count++) {
 		if(count == index)
-			return traverser->data;
+			return traverser;
 	}	
+}
+ 
+void *getElementAt(LinkedList list, int index) {
+	return getNodeAt(list,index)->data;
 }
 
 int indexOf(LinkedList list,void* data) {
@@ -68,31 +72,15 @@ int indexOf(LinkedList list,void* data) {
 }
 
 void *deleteElementAt(LinkedList* list, int index) {
-	Node *traverser;
+	Node *element = getNodeAt(*list,index);
 	void *tmp;
-	int count = 0;
 	if(list->count < index || index < 0 || list->head == NULL)return NULL;
 	list->count-=1;
-	for(traverser = list->head;traverser!=NULL;traverser = traverser->next,count++) {
-		if(index == 0){
-			tmp = list->head->data;
-			printf("%d\n",tmp );
-			list->head = list->head->next;
-			traverser->next = NULL;
-			return tmp;
-		}
-		if(count == list->count-1){
-			tmp = traverser->next->data;
-			traverser->next = NULL;
-			list->tail = traverser;
-			return tmp;
-		}
-		if(count == index-1) {
-			tmp = traverser->next->data;
-			traverser->next = traverser->next->next;
-			return tmp;
-		}
-	}	
+	(element->next==NULL)&&(list->count==0)?(list->head=list->tail=NULL):(list->tail=getNodeAt(*list,index-1)); 
+	(index==0&&element->next!=NULL)&&(list->head=list->head->next);
+	(list->count>1 && index>0) && (getNodeAt(*list,index-1)->next=getNodeAt(*list,index+1));
+	(list->count==1) && (getNodeAt(*list,index-1)->next=NULL);  
+	return element->data;
 }
 
 int asArray(LinkedList list, void** arr) {

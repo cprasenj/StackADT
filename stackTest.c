@@ -67,5 +67,17 @@ void test_pop_002() {
 	assertEqual(res,NULL);
 }
 
+void test_pop_003() {
+	log("pop will send the top to null if there is only one element in the stack");
+	Stack stack = createStack();
+	int data = 24,res;
+	int* result;
+	res = push(stack,&data);
+	assertEqual(res,1);
+	assertEqual(*((int *)(*(stack.top))->data),24);
+	result = pop(stack);
+	assertEqual(*result,24);
+	assertEqual(*(stack.top),NULL);
+}
 
 
