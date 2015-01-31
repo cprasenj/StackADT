@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "linklist.h"
+#include "Stack.h"
 
 LinkedList createList() {
 	LinkedList *list;
@@ -69,11 +69,12 @@ void *deleteElementAt(LinkedList* list, int index) {
 	Node *traverser;
 	void *tmp;
 	int count = 0;
-	list->count-=1;
 	if(list->count < index || index < 0)return NULL;
+	list->count-=1;
 	for(traverser = list->head;traverser!=NULL;traverser = traverser->next,count++) {
 		if(index == 0){
 			tmp = list->head->data;
+			printf("%d\n",tmp );
 			list->head = list->head->next;
 			traverser->next = NULL;
 			return tmp;
