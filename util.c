@@ -6,8 +6,7 @@ LinkedList createList() {
 	LinkedList *list;
 	list = malloc(sizeof(LinkedList));
 	list->count = 0;
-	list->head = NULL;
-	list->tail = NULL;
+	list->head = list->tail = NULL;
 	return *list;
 }
 
