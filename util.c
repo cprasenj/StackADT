@@ -13,6 +13,7 @@ LinkedList createList() {
 
 Node* create_node(void* data){
 	Node *n; 
+	if(!*(int *)data) return NULL;
 	n = malloc(sizeof(Node));
 	n->data = data;
 	n->next = NULL;
@@ -28,6 +29,7 @@ int add_to_list(LinkedList* list,Node* s) {
 		list->tail->next = s;
 	list->tail = s;
 	list->count++;
+	return 1;
 }
 
 void *get_first_element(LinkedList list) {

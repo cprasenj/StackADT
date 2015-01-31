@@ -27,6 +27,14 @@ void test_push_001() {
 	assertEqual(*((int *)(*(stack.top))->data),23);
 }
 
+void test_push_002() {
+	log("Returns -1 for empty node");
+	Stack stack = createStack();
+	int data = NULL,res;
+	res = push(stack,&data);
+	assertEqual(res,-1);
+}
+
 void test_pop_001() {
 	log("Pops an integer element from the top of a stack");
 	Stack stack = createStack();
@@ -42,3 +50,4 @@ void test_pop_001() {
 	assertEqual(stack.stack->count,1);
 	assertEqual(*((int *)(*(stack.top))->data),24);
 }
+
