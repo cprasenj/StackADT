@@ -10,7 +10,7 @@ Stack createStack(void) {
 int push(Stack stack, void* data) {
 	Node* element = create_node(data);
 	int task = add_to_list(stack.stack,element);
-	stack.top = stack.stack->head;
+	stack.top = stack.stack->tail;
 	return (task) ? stack.stack->count : -1;
 }
 	
