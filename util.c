@@ -71,7 +71,7 @@ void *deleteElementAt(LinkedList* list, int index) {
 	Node *traverser;
 	void *tmp;
 	int count = 0;
-	if(list->count < index || index < 0)return NULL;
+	if(list->count < index || index < 0 || list->head == NULL)return NULL;
 	list->count-=1;
 	for(traverser = list->head;traverser!=NULL;traverser = traverser->next,count++) {
 		if(index == 0){

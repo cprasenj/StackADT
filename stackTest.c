@@ -12,7 +12,9 @@ void test_createStack_001() {
 	assertEqual(stack.stack->head,tmp.head);
 	assertEqual(stack.stack->count,tmp.count);
 	assertEqual(stack.stack->tail,tmp.tail);
-	assertEqual(*(stack.top),NULL);	
+	assertEqual(*(stack.top),NULL);
+	free(stack.stack);
+	stack.top = NULL;
 }
 
 void test_push_001() {
@@ -25,6 +27,8 @@ void test_push_001() {
 	res = push(stack,&data1);
 	assertEqual(res,2);
 	assertEqual(*((int *)(*(stack.top))->data),23);
+	free(stack.stack);
+	stack.top = NULL;
 }
 
 void test_push_002() {
@@ -33,6 +37,8 @@ void test_push_002() {
 	int data = NULL,res;
 	res = push(stack,&data);
 	assertEqual(res,-1);
+	free(stack.stack);
+	stack.top = NULL;
 }
 
 void test_pop_001() {
@@ -49,5 +55,17 @@ void test_pop_001() {
 	result = pop(stack);
 	assertEqual(stack.stack->count,1);
 	assertEqual(*((int *)(*(stack.top))->data),24);
+	free(stack.stack);
+	stack.top = NULL;
 }
+
+void test_pop_002() {
+	log("Pop gives NULL for empty stack");
+	Stack stack = createStack();
+	void* res;
+	res = pop(stack);
+	assertEqual(res,NULL);
+}
+
+
 
